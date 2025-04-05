@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Image from "next/image";
 import { Album, Song, Era } from "../types/music";
 import { usePlayerStore } from "../store/usePlayerStore";
 import { PlayIcon, PauseIcon } from "@heroicons/react/24/solid";
@@ -79,11 +80,14 @@ export default function MusicLibrary({ albums = [] }: MusicLibraryProps) {
 
         <div className="flex items-start space-x-6">
           {selectedAlbum.coverUrl && (
-            <img
-              src={selectedAlbum.coverUrl}
-              alt={selectedAlbum.title}
-              className="w-48 h-48 object-cover rounded-lg shadow-lg"
-            />
+            <div className="relative w-48 h-48">
+              <Image
+                src={selectedAlbum.coverUrl}
+                alt={selectedAlbum.title}
+                fill
+                className="object-cover rounded-lg shadow-lg"
+              />
+            </div>
           )}
 
           <div>
@@ -149,11 +153,14 @@ export default function MusicLibrary({ albums = [] }: MusicLibraryProps) {
                   onClick={() => setSelectedAlbum(album)}
                 >
                   {album.coverUrl ? (
-                    <img
-                      src={album.coverUrl}
-                      alt={album.title}
-                      className="w-full aspect-square object-cover rounded-lg shadow-lg"
-                    />
+                    <div className="relative w-full aspect-square">
+                      <Image
+                        src={album.coverUrl}
+                        alt={album.title}
+                        fill
+                        className="object-cover rounded-lg shadow-lg"
+                      />
+                    </div>
                   ) : (
                     <div className="w-full aspect-square bg-gray-200 dark:bg-gray-800 rounded-lg flex items-center justify-center">
                       <span className="text-gray-500">{album.title[0]}</span>

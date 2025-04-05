@@ -134,12 +134,11 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
 
-    // Upload to Vercel Blob
-    const response = await fetch(file.stream());
-    const buffer = await response.arrayBuffer();
+    // Convert the file to ArrayBuffer
+    const bytes = await file.arrayBuffer();
 
     // Upload to Vercel Blob
-    const blob = await put(file.name, buffer, {
+    const blob = await put(file.name, bytes, {
       access: "public",
       addRandomSuffix: false,
     });

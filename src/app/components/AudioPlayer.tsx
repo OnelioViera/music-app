@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { Howl } from "howler";
+import Image from "next/image";
 import { usePlayerStore } from "../store/usePlayerStore";
 import {
   PlayIcon,
@@ -70,11 +71,14 @@ export default function AudioPlayer() {
       <div className="max-w-screen-xl mx-auto flex items-center justify-between">
         <div className="flex items-center space-x-4">
           {currentSong.coverUrl && (
-            <img
-              src={currentSong.coverUrl}
-              alt={currentSong.title}
-              className="w-12 h-12 rounded-md"
-            />
+            <div className="relative w-12 h-12">
+              <Image
+                src={currentSong.coverUrl}
+                alt={currentSong.title}
+                fill
+                className="rounded-md object-cover"
+              />
+            </div>
           )}
           <div>
             <h3 className="font-medium text-gray-900 dark:text-white">
